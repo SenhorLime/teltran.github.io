@@ -1,8 +1,10 @@
 // Iterate all the wrapper elements in a forEach to apply the changes in all carousel elements
 document.querySelectorAll(".wrapper").forEach((wrapper) => {
+  // Select the elements inside each wrapper div
   const carousel = wrapper.querySelector(".carousel");
+  const arrowBtns = wrapper.querySelectorAll("i");
+  
   const firstCardWidth = carousel.querySelector(".card").offsetWidth;
-  const arrowBtns = document.querySelectorAll(".wrapper i");
   const carouselChildrens = [...carousel.children];
   let isDragging = false,
     isAutoPlay = true,
@@ -34,6 +36,7 @@ document.querySelectorAll(".wrapper").forEach((wrapper) => {
   // Add event listeners for the arrow buttons to scroll the carousel left and right
   arrowBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
+      // Scroll the current carousel, not all carousels
       carousel.scrollLeft +=
         btn.id == "left" ? -firstCardWidth : firstCardWidth;
     });
@@ -86,6 +89,7 @@ document.querySelectorAll(".wrapper").forEach((wrapper) => {
   };
 
   autoPlay();
+
   carousel.addEventListener("mousedown", dragStart);
   carousel.addEventListener("mousemove", dragging);
   document.addEventListener("mouseup", dragStop);
